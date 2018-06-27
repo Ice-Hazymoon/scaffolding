@@ -1,0 +1,17 @@
+/*
+ * File: .editorconfig
+ * Project: h5
+ * File Created: Wednesday, 27th June 2018 2:39:33 pm
+ * Author: Ice-Hazymoon (imiku.me@gmail.com)
+ * -----
+ * Last Modified: Wednesday, 27th June 2018 2:39:33 pm
+ * Modified By: Ice-Hazymoon (imiku.me@gmail.com)
+ */
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true

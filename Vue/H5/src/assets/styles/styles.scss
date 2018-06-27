@@ -1,0 +1,24 @@
+/*
+ * File: styles.scss
+ * Project: h5
+ * File Created: Wednesday, 27th June 2018 10:28:24 am
+ * Author: Ice-Hazymoon (imiku.me@gmail.com)
+ * -----
+ * Last Modified: Wednesday, 27th June 2018 2:41:09 pm
+ * Modified By: Ice-Hazymoon (imiku.me@gmail.com)
+ */
+html{
+    font-size: 16px;
+    font-size: calc(1vw + 1vh + 1.5vmin);
+    font-family:"Microsoft YaHei", sans-serif;
+}
+
+.page{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+.swiper-container,.swiper-wrapper {
+    width: 100%;
+    height: 100%;
+}
