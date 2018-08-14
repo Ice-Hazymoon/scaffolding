@@ -8,5 +8,6 @@
  * Modified By: Ice-Hazymoon (imiku.me@gmail.com)
  */
 module.exports = {
-    baseUrl: './'
-}
+  baseUrl: "./",
+  lintOnSave: false
+};

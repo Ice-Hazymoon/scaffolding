@@ -4,8 +4,8 @@
  * File Created: Wednesday, 27th June 2018 10:28:24 am
  * Author: Ice-Hazymoon (imiku.me@gmail.com)
  * -----
- * Last Modified: Wednesday, 27th June 2018 2:41:09 pm
- * Modified By: Ice-Hazymoon (imiku.me@gmail.com)
+ * Last Modified: Tuesday, 14th August 2018 10:21:59 am
+ * Modified By: Administrator
  */
 html{
     font-size: 16px;
@@ -21,4 +21,33 @@ html{
 .swiper-container,.swiper-wrapper {
     width: 100%;
     height: 100%;
+}
+
+#music{
+    width: 40px;
+    height: 40px;
+    z-index: 998;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    opacity: .5;
+    &.rotate{
+        animation: rotate 3s linear infinite;
+    }
+    svg{
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@keyframes rotate {
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(180deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
 }

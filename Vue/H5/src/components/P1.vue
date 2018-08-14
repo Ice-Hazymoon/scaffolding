@@ -17,26 +17,24 @@
     </swiper-slide>
 </template>
 <script>
-export default {
-    
-}
+export default {};
 </script>
 <style lang="scss" scoped>
-    .P1{
-        img{
-            display: block;
-            margin: 0 auto;
-        }
-        .a{
-            width: 100px;
-            height: 100px;
-            background-color: red;
-        }
-        .b{
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: blue;
-        }
-    }
+.P1 {
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+  .a {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+  }
+  .b {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: blue;
+  }
+}
 </style>

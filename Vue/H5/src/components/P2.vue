@@ -14,16 +14,14 @@
     </swiper-slide>
 </template>
 <script>
-export default {
-    
-}
+export default {};
 </script>
 <style lang="scss" scoped>
-    .P2{
-        background-color: #000;
-        img{
-            display: block;
-            margin: 0 auto;
-        }
-    }
+.P2 {
+  background-color: #000;
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
 </style>

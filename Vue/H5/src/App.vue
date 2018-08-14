@@ -1,63 +1,174 @@
 <template>
-  <div id="app">
-    <swiper :options="swiperOption" ref="mySwiper">
-      <P1></P1>
-      <P2></P2>
-    </swiper>
-  </div>
+    <div id="app">
+        <div class="loading" v-if="loading">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+            <div class="text">加载中...</div>
+        </div>
+        <swiper :options="swiperOption" ref="mySwiper">
+            <P1></P1>
+            <P2></P2>
+        </swiper>
+        <div class="copy">壹视界策划运营</div>
+    </div>
 </template>
 
 <script>
-import swiperAnimation from 'swiper-animate-cn';
+import swiperAnimation from "swiper-animate-cn";
 const swiperAnimateCache = swiperAnimation.swiperAnimateCache;
 const swiperAnimate = swiperAnimation.swiperAnimate;
-import P1 from './components/P1';
-import P2 from './components/P2';
+import P1 from "./components/P1";
+import P2 from "./components/P2";
+
+let _this;
 
 export default {
-  data(){
-    return {
-      swiperOption: {
-        direction: 'vertical',
-        on:{
-          init: function(){
-            swiperAnimateCache(this);
-            swiperAnimate(this);
-          }, 
-          slideChangeTransitionEnd: function(){ 
-            swiperAnimate(this);
-          } 
+    data() {
+        return {
+            loading: true,
+            swiperOption: {
+                direction: "vertical",
+                on: {
+                    init: function () {
+                        swiperAnimateCache(this);
+                        swiperAnimate(this);
+                    },
+                    slideChangeTransitionEnd: function () {
+                        swiperAnimate(this);
+                        if(this.activeIndex === 4){
+                            _this.downIcon = false;
+                        }else{
+                            _this.downIcon = true;
+                        }
+                    },
+                    imagesReady: () => {
+                        this.loading = false;
+                    }
+                }
+            }
+        };
+    },
+    computed: {
+        swiper() {
+            return this.$refs.mySwiper.swiper;
         }
-      },
+    },
+    methods: {
+        next() {
+            this.swiper.slideNext();
+        }
+    },
+    name: "app",
+    components: {
+        P1,
+        P2
+    },
+    mounted(){
+        _this = this;
+        let startScroll, touchStart, touchCurrent;
+        this.swiper.slides.on('touchstart', function (e) {
+            startScroll = this.scrollTop;
+            touchStart = e.targetTouches[0].pageY;
+        }, true);
+        this.swiper.slides.on('touchmove', function (e) {
+            touchCurrent = e.targetTouches[0].pageY;
+            let touchesDiff = touchCurrent - touchStart;
+            let slide = this;
+            let onlyScrolling =
+                    ( slide.scrollHeight > slide.offsetHeight ) &&
+                    (
+                        ( touchesDiff < 0 && startScroll === 0 ) ||
+                        ( touchesDiff > 0 && startScroll === ( slide.scrollHeight - slide.offsetHeight ) ) ||
+                        ( startScroll > 0 && startScroll < ( slide.scrollHeight - slide.offsetHeight ) )
+                    );
+            if (onlyScrolling) e.stopPropagation();
+        }, true);
     }
-  },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper
-    }
-  },
-  methods: {
-    next(){
-      this.swiper.slideNext();
-    }
-  },
-  name: "app",
-  components: {
-    P1,
-    P2,
-  }
 };
 </script>
 
 <style lang="scss">
 #app {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url('./assets/bg.jpg');
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('./assets/bg.jpg');
+    .copy{
+        position: fixed;
+        z-index: 999;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 12px;
+        color: #fff;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 1px rgba($color: #000000, $alpha: .5);
+    }
+    .loading {
+        z-index: 999;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .text {
+            margin-top: 20px;
+            letter-spacing: 1px;
+            font-size: 15px;
+        }
+        .spinner {
+            width: 50px;
+            height: 40px;
+            text-align: center;
+            font-size: 10px;
+            > div {
+                margin: 0 2px;
+                background-color: #333;
+                height: 100%;
+                width: 6px;
+                display: inline-block;
+                animation: sk-stretchdelay 1.2s infinite ease-in-out;
+            }
+            .rect2 {
+                animation-delay: -1.1s;
+            }
+            .rect3 {
+                animation-delay: -1s;
+            }
+            .rect4 {
+                animation-delay: -0.9s;
+            }
+            .rect5 {
+                animation-delay: -0.8s;
+            }
+        }
+        @keyframes sk-stretchdelay {
+            0%,
+            40%,
+            100% {
+                transform: scaleY(0.4);
+            }
+
+            20% {
+                transform: scaleY(1);
+            }
+        }
+    }
 }
 </style>
