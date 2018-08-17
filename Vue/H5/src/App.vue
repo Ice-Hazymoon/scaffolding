@@ -10,6 +10,7 @@
             </div>
             <div class="text">加载中...</div>
         </div>
+		<svg v-show="downIcon" class="next-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1266" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M512 768c-8 0-16-3.2-22.4-9.6l-384-384c-12.8-12.8-12.8-32 0-44.8 12.8-12.8 32-12.8 44.8 0L512 691.2l361.6-361.6c12.8-12.8 32-12.8 44.8 0 12.8 12.8 12.8 32 0 44.8l-384 384c-6.4 6.4-14.4 9.6-22.4 9.6z" p-id="1267"></path></svg>
         <swiper :options="swiperOption" ref="mySwiper">
             <P1></P1>
             <P2></P2>
@@ -30,6 +31,7 @@ let _this;
 export default {
     data() {
         return {
+            downIcon: false,
             loading: true,
             swiperOption: {
                 direction: "vertical",
@@ -115,6 +117,20 @@ export default {
         letter-spacing: 1px;
         text-shadow: 1px 1px 1px rgba($color: #000000, $alpha: .5);
     }
+    .next-icon{
+        z-index: 998;
+        position: fixed;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: 20px;
+        width: 50px;
+        opacity: .25;
+        transform: rotate(180deg);
+        text-shadow:  1px 1px 1px rgba($color: #000000, $alpha: .7);
+        fill: #000;
+        animation: down infinite 1.5s ease;
+    }
     .loading {
         z-index: 999;
         position: fixed;
@@ -167,6 +183,17 @@ export default {
 
             20% {
                 transform: scaleY(1);
+            }
+        }
+        @keyframes down {
+            0%{
+                transform: translateY(0px);
+            }
+            50%{
+                transform: translateY(10px);
+            }
+            100%{
+                transform: translateY(0px);
             }
         }
     }
